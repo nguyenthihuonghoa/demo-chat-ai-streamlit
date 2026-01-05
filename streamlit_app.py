@@ -15,8 +15,16 @@ class ChatMessage(TypedDict):
     role: str  # "user" | "assistant"
     content: str
 
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-BACKEND_URL_DEFAULT: str = os.getenv("HISTORYBOT_BACKEND_URL", "https://heptahedral-expiringly-hypatia.ngrok-free.dev")
+BACKEND_URL_DEFAULT: str = os.getenv("HISTORYBOT_BACKEND_URL")
 
 
 def get_backend_url() -> str:
