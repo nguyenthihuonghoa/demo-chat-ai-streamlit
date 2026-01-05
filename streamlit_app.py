@@ -16,7 +16,7 @@ class ChatMessage(TypedDict):
     content: str
 
 
-BACKEND_URL_DEFAULT: str = os.getenv("HISTORYBOT_BACKEND_URL", "http://localhost:8000")
+BACKEND_URL_DEFAULT: str = os.getenv("HISTORYBOT_BACKEND_URL", "https://heptahedral-expiringly-hypatia.ngrok-free.dev")
 
 
 def get_backend_url() -> str:
