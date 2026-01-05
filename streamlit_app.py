@@ -23,44 +23,41 @@ st.set_page_config(page_title="Lịch Sử 10, 11, 12 AI Tutor", page_icon="📚
 # CSS để ẩn Footer, MainMenu và Header mặc định của Streamlit Cloud
 hide_streamlit_style = """
 <style>
-    /* 1. Ẩn thanh Header trên cùng (cái vạch màu) */
+    /* 1. Ẩn thanh header trên cùng */
     header[data-testid="stHeader"] {
         visibility: hidden;
         height: 0%;
     }
-
-    /* 2. Ẩn Footer mặc định "Made with Streamlit" */
+    
+    /* 2. Ẩn footer */
     footer {
         visibility: hidden;
         height: 0%;
     }
 
-    /* 3. Ẩn nút 3 chấm (Hamburger Menu) ở góc phải trên */
-    div[data-testid="stToolbar"] {
-        visibility: hidden;
-        height: 0%;
-    }
-
-    /* 4. Ẩn các nút Decoration (góc phải trên) */
-    div[data-testid="stDecoration"] {
-        visibility: hidden;
-        height: 0%;
-    }
-
-    /* 5. Ẩn nút "Manage app" / "Hosted with Streamlit" (Cái khó chịu nhất) */
-    /* Cách này nhắm vào class chứa chữ 'viewerBadge' thường dùng cho nút góc phải dưới */
-    div[class*="viewerBadge"] {
+    /* 3. Ẩn nút Manage App (Deploy Button) */
+    .stAppDeployButton {
         display: none !important;
+        visibility: hidden !important;
     }
-    
-    /* Ẩn luôn element cha của footer nếu cần */
-    .stApp > footer {
+
+    /* 4. Ẩn Decoration (vạch màu) */
+    [data-testid="stDecoration"] {
+        display: none;
+    }
+
+    /* 5. Ẩn nút 3 chấm (Status Widget) */
+    [data-testid="stStatusWidget"] {
+        display: none;
+    }
+
+    /* 6. Cố gắng ẩn container chứa nút Manage App bằng selector rộng hơn */
+    div[class*="viewerBadge"] {
         display: none !important;
     }
 </style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
 # Lấy URL mặc định từ biến môi trường (nếu có)
 BACKEND_URL_DEFAULT: str = os.getenv("HISTORYBOT_BACKEND_URL", "http://localhost:8000")
 
