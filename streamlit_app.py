@@ -23,17 +23,40 @@ st.set_page_config(page_title="Lịch Sử 10, 11, 12 AI Tutor", page_icon="📚
 # CSS để ẩn Footer, MainMenu và Header mặc định của Streamlit Cloud
 hide_streamlit_style = """
 <style>
-    /* Ẩn menu 3 chấm ở góc trên bên phải */
-    #MainMenu {visibility: hidden;}
+    /* 1. Ẩn thanh Header trên cùng (cái vạch màu) */
+    header[data-testid="stHeader"] {
+        visibility: hidden;
+        height: 0%;
+    }
+
+    /* 2. Ẩn Footer mặc định "Made with Streamlit" */
+    footer {
+        visibility: hidden;
+        height: 0%;
+    }
+
+    /* 3. Ẩn nút 3 chấm (Hamburger Menu) ở góc phải trên */
+    div[data-testid="stToolbar"] {
+        visibility: hidden;
+        height: 0%;
+    }
+
+    /* 4. Ẩn các nút Decoration (góc phải trên) */
+    div[data-testid="stDecoration"] {
+        visibility: hidden;
+        height: 0%;
+    }
+
+    /* 5. Ẩn nút "Manage app" / "Hosted with Streamlit" (Cái khó chịu nhất) */
+    /* Cách này nhắm vào class chứa chữ 'viewerBadge' thường dùng cho nút góc phải dưới */
+    div[class*="viewerBadge"] {
+        display: none !important;
+    }
     
-    /* Ẩn footer "Made with Streamlit" */
-    footer {visibility: hidden;}
-    
-    /* Ẩn thanh header decoration (thường có màu) ở trên cùng */
-    header {visibility: hidden;} 
-    
-    /* Ẩn thanh toolbar header trong các version mới của Streamlit Cloud */
-    .stAppHeader {visibility: hidden;}
+    /* Ẩn luôn element cha của footer nếu cần */
+    .stApp > footer {
+        display: none !important;
+    }
 </style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
