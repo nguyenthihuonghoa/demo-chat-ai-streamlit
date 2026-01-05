@@ -23,36 +23,59 @@ st.set_page_config(page_title="Lịch Sử 10, 11, 12 AI Tutor", page_icon="📚
 # CSS để ẩn Footer, MainMenu và Header mặc định của Streamlit Cloud
 hide_streamlit_style = """
 <style>
-    /* 1. Ẩn thanh header trên cùng */
-    header[data-testid="stHeader"] {
-        visibility: hidden;
-        height: 0%;
+    /* 1. Ẩn Header, Footer, MainMenu mặc định */
+    #MainMenu {visibility: hidden; display: none;}
+    header {visibility: hidden; display: none;}
+    footer {visibility: hidden; display: none;}
+    [data-testid="stHeader"] {visibility: hidden; display: none;}
+    [data-testid="stToolbar"] {visibility: hidden; display: none;}
+    [data-testid="stDecoration"] {visibility: hidden; display: none;}
+
+    /* 2. ẨN ICON PROFILE (NARUTO) & VIEWER BADGE */
+    /* Cách 1: Nhắm vào class có chứa chữ 'viewerBadge' (bất kể mã phía sau) */
+    div[class*="viewerBadge"] {
+        visibility: hidden !important;
+        display: none !important;
+        height: 0px !important;
     }
     
-    /* 2. Ẩn footer */
-    footer {
-        visibility: hidden;
-        height: 0%;
-    }
-
-    /* 3. Ẩn nút Manage App (Deploy Button) */
-    .stAppDeployButton {
+    /* Cách 2: Nhắm vào các phần tử con SVG (icon) trong container badge */
+    div[class*="viewerBadge"] * {
         display: none !important;
-        visibility: hidden !important;
     }
 
-    /* 4. Ẩn Decoration (vạch màu) */
-    [data-testid="stDecoration"] {
-        display: none;
+    /* 3. ẨN LOGO "THUYỀN ĐỎ" (HOSTED WITH STREAMLIT) */
+    /* Logo này thường nằm trong footer hoặc một div cố định ở bottom-right */
+    
+    /* Trường hợp A: Nó nằm trong footer container */
+    .stApp > footer {
+        display: none !important;
     }
 
-    /* 5. Ẩn nút 3 chấm (Status Widget) */
-    [data-testid="stStatusWidget"] {
-        display: none;
+    /* Trường hợp B: Nó là một element cố định (fixed) ở góc phải dưới */
+    /* Cẩn thận: Code này sẽ ẩn mọi thứ cố định ở góc phải dưới */
+    div:not(.stToast):not(.stTooltip) {
+        /* Chỉ ẩn nếu nó nằm dính góc dưới phải và có vị trí fixed */
+    }
+    
+    /* Cụ thể cho logo Streamlit Cloud mới nhất */
+    a[href*="streamlit.io/cloud"] {
+        display: none !important;
+    }
+    
+    a[href*="streamlit.app"] {
+        display: none !important;
     }
 
-    /* 6. Cố gắng ẩn container chứa nút Manage App bằng selector rộng hơn */
-    div[class*="viewerBadge"] {
+    /* 4. CHẶN TƯƠNG TÁC (Nếu hình vẫn còn mờ mờ thì không cho bấm) */
+    div[class*="styles_viewerBadge"] {
+        pointer-events: none !important;
+        opacity: 0 !important;
+    }
+
+    /* 5. XỬ LÝ THANH BOTTOM CONTAINER (Nơi chứa các nút này) */
+    /* Ẩn div cha chứa cả cụm này (thường có class kiểu 'stApp...footer') */
+    div[class*="main-footer"] {
         display: none !important;
     }
 </style>
